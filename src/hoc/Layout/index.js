@@ -1,4 +1,4 @@
-import Box from 'components/common/abstract/Box';
+import Box from 'components/abstract/Box';
 import Header from 'components/Header';
 import PropTypes from 'prop-types';
 

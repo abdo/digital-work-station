@@ -1,15 +1,17 @@
-import Box from 'components/common/abstract/Box';
-import Img from 'components/common/basic/Img';
-import Text from 'components/common/basic/Text';
+import Box from 'components/abstract/Box';
+import Img from 'components/basic/Img';
+import Text from 'components/basic/Text';
 import assets from 'assets';
 import theme from 'style/theme';
 
 const { appLogo } = assets;
 
+export const headerHeight = '8.5rem';
+
 const Header = () => {
   return (
     <Box
-      h='8.5rem'
+      h={headerHeight}
       w='100%'
       bgc={theme.colors.main}
       p='0 2.2rem'

@@ -1,4 +1,4 @@
-import Box from 'components/common/abstract/Box';
+import Box from 'components/abstract/Box';
 import ImgStyled from './style';
 import PropTypes from 'prop-types';
 import React from 'react';

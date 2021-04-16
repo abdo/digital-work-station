@@ -1,7 +1,12 @@
 import Layout from 'hoc/Layout';
+import MainPage from 'pages/Main';
 
 const App = () => {
-  return <Layout>page</Layout>;
+  return (
+    <Layout>
+      <MainPage />
+    </Layout>
+  );
 };
 
 export default App;
