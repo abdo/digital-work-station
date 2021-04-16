@@ -44,6 +44,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     color: ${({ theme }) => theme.colors.text1};
     line-height: 21px;
+    font-size: 1.4rem;
 
     ::-webkit-scrollbar {
       width: 1.5rem;
