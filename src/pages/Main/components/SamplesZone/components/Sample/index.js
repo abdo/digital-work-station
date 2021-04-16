@@ -16,10 +16,6 @@ const Sample = ({ sample: { name, src }, isDragging }) => {
     MainContext
   );
 
-  useEffect(() => {
-    setAudio(new Audio(src));
-  }, []);
-
   const playAudio = () => {
     audio.play();
     setCurrentlyPlayingAudio(audio);
@@ -39,6 +35,14 @@ const Sample = ({ sample: { name, src }, isDragging }) => {
       playAudio();
     }
   };
+
+  useEffect(() => {
+    const music = new Audio(src);
+    music.onended = () => {
+      setisAudioPlaying(false);
+    };
+    setAudio(music);
+  }, []);
 
   useEffect(() => {
     if (currentlyPlayingAudio.src !== audio.src) {
