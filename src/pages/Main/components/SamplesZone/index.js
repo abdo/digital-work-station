@@ -23,8 +23,8 @@ const SamplesZone = () => {
       </Text>
       {samples.map((sample) => (
         <Draggable
-          key={sample.name}
-          id={sample.name}
+          key={sample.id}
+          id={sample.id}
           type='sample'
           data={sample}
           renderDraggableComponent={({ events }) => (
