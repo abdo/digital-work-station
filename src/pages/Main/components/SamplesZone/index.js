@@ -1,4 +1,5 @@
 import Box from 'components/abstract/Box';
+import Draggable from 'components/abstract/Draggable';
 import Sample from './components/Sample';
 import Text from 'components/basic/Text';
 import samples from './samples';
@@ -21,7 +22,29 @@ const SamplesZone = () => {
         Samples
       </Text>
       {samples.map((sample) => (
-        <Sample sample={sample} key={sample.name} />
+        <Draggable
+          key={sample.name}
+          id={sample.name}
+          type='sample'
+          data={sample}
+          renderDraggableComponent={({ events }) => (
+            <div {...events}>
+              <Sample sample={sample} key={sample.name} />
+            </div>
+          )}
+          renderDragComponent={({ x, y }) => (
+            <div
+              style={{
+                position: 'fixed',
+                pointerEvents: 'none',
+                left: x - 30,
+                top: y - 30,
+              }}
+            >
+              <Sample sample={sample} key={sample.name} isDragging />
+            </div>
+          )}
+        />
       ))}
     </Box>
   );
