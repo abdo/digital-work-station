@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Box from 'components/abstract/Box';
+import { MainContext } from 'pages/Main';
 import PropTypes from 'prop-types';
 import Text from 'components/basic/Text';
 import assets from 'assets';
@@ -11,27 +12,46 @@ const { PlayIcon, PauseIcon } = assets;
 const Sample = ({ sample: { name, src }, isDragging }) => {
   const [audio, setAudio] = useState({});
   const [isAudioPlaying, setisAudioPlaying] = useState(false);
+  const { currentlyPlayingAudio, setCurrentlyPlayingAudio } = useContext(
+    MainContext
+  );
 
   useEffect(() => {
     setAudio(new Audio(src));
   }, []);
 
+  const playAudio = () => {
+    audio.play();
+    setCurrentlyPlayingAudio(audio);
+    setisAudioPlaying(true);
+  };
+
+  const pauseAudio = () => {
+    audio.pause?.();
+    audio.currentTime = 0;
+    setisAudioPlaying(false);
+  };
+
   const toggleAudioPlaying = () => {
     if (isAudioPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
+      pauseAudio();
     } else {
-      audio.play();
+      playAudio();
     }
-    setisAudioPlaying((state) => !state);
   };
+
+  useEffect(() => {
+    if (currentlyPlayingAudio.src !== audio.src) {
+      pauseAudio();
+    }
+  }, [currentlyPlayingAudio]);
 
   return (
     <Box
       bgc={isDragging ? theme.colors.flameBackground : theme.colors.background3}
       p='0 2.1rem'
       m='0.8rem 0'
-      minW='25rem'
+      minW='20vw'
       borderRadius='0.8rem'
       h='5.6rem'
       display='flex'
