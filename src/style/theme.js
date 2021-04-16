@@ -5,6 +5,8 @@ const theme = {
     background2: '#F9FAFB',
     background3: '#F3F4F6',
     background4: '#D1D5DB',
+    background5: '#E5E7EB',
+    background6: '#9CA3AF',
     text1: '#1F2937',
     text2: '#4C4E50',
     text3: '#666F7C',

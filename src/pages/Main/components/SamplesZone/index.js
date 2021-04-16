@@ -1,6 +1,7 @@
 import Box from 'components/abstract/Box';
-import React from 'react';
+import Sample from './components/Sample';
 import Text from 'components/basic/Text';
+import samples from './samples';
 import theme from 'style/theme';
 
 const SamplesZone = () => {
@@ -15,10 +16,13 @@ const SamplesZone = () => {
       <Text
         type='h1'
         color={theme.colors.text2}
-        containerProps={{ m: '0 0 0.8rem 0.8rem' }}
+        containerProps={{ m: '1.6rem 0.8rem' }}
       >
         Samples
       </Text>
+      {samples.map((sample) => (
+        <Sample sample={sample} key={sample.name} />
+      ))}
     </Box>
   );
 };

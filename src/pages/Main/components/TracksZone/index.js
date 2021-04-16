@@ -1,5 +1,4 @@
 import Box from 'components/abstract/Box';
-import React from 'react';
 import theme from 'style/theme';
 
 const TracksZone = () => {
