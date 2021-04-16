@@ -1,13 +1,23 @@
+import App from './App';
+import GlobalStyle from 'style/globalStyle/index';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { ThemeProvider } from 'styled-components';
 import reportWebVitals from './reportWebVitals';
+import theme from 'style/theme';
+
+let app = <App />;
+
+// Hook styled-components theme and GlobalStyle
+app = (
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    {app}
+  </ThemeProvider>
+);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <React.StrictMode>{app}</React.StrictMode>,
   document.getElementById('root')
 );
 
