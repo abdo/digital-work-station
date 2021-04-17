@@ -5,6 +5,7 @@ import Droppable from 'components/abstract/Droppable';
 import EmptyTrackPart from './components/EmptyTrackPart';
 import FilledTrackPart from './components/FilledTrackPart';
 import { MainContext } from 'pages/Main';
+import Text from 'components/basic/Text';
 import TrackActions from './components/TrackActions';
 import samples from 'pages/Main/components/SamplesZone/samples';
 import theme from 'style/theme';
@@ -75,6 +76,8 @@ const TrackDraft = () => {
     onClearTrackDraft();
   }, [savedTracks]);
 
+  const isTrackEmpty = parts.every((part) => !part.src);
+
   return (
     <Box
       bgc={theme.colors.background2}
@@ -91,7 +94,23 @@ const TrackDraft = () => {
         alignItems='center'
         bgc={theme.colors.background3}
         borderRadius='0.8rem'
+        position='relative'
       >
+        <Box
+          position='absolute'
+          top='50%'
+          left='50%'
+          transform='translate(-50%,-50%)'
+          hidden={!isTrackEmpty}
+        >
+          <Text
+            containerProps={{ m: '0' }}
+            color={theme.colors.text4}
+            textTransform='uppercase'
+          >
+            Drag & drop samples here
+          </Text>
+        </Box>
         {parts.map(({ id, src, duration, name, color }, index) => {
           const isPartBeingPlayed = currentlyPlayingDraftTrackPart?.id === id;
 

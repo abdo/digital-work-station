@@ -1,9 +1,13 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import Box from 'components/abstract/Box';
 import SamplesZone from './components/SamplesZone';
 import TracksZone from './components/TracksZone';
 import { headerHeight } from 'components/Header';
+import localStorageConstants from 'constants/localStorage';
+import theme from 'style/theme';
+
+const { SAVED_TRACKS_REFERENCE } = localStorageConstants;
 
 export const MainContext = createContext(null);
 
@@ -16,8 +20,20 @@ const Main = () => {
   const [isTrackDraftPlaying, setIsTrackDraftPlaying] = useState(false);
   const [savedTracks, setSavedTracks] = useState([]);
 
+  useEffect(() => {
+    const previouslySavedTracks = JSON.parse(
+      localStorage.getItem(SAVED_TRACKS_REFERENCE)
+    );
+
+    if (previouslySavedTracks) {
+      setSavedTracks(previouslySavedTracks);
+    }
+  }, []);
+
   const onSaveTrack = (newTrack) => {
-    setSavedTracks((tracks) => [newTrack, ...tracks]);
+    const newTracks = [newTrack, ...savedTracks];
+    setSavedTracks(newTracks);
+    localStorage.setItem(SAVED_TRACKS_REFERENCE, JSON.stringify(newTracks));
   };
 
   const minPageHeight = `calc(100vh - ${headerHeight})`;
@@ -36,7 +52,7 @@ const Main = () => {
       }}
     >
       <Box minH={minPageHeight} display='flex'>
-        <Box w='35%' minH={minPageHeight}>
+        <Box w='35%' minH={minPageHeight} bgc={theme.colors.background2}>
           <SamplesZone />
         </Box>
         <Box w='fill-available' minH={minPageHeight}>

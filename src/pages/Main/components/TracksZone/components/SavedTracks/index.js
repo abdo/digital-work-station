@@ -10,15 +10,16 @@ const SavedTracks = () => {
 
   return (
     <Box m='4rem 0 0 2rem'>
-      <Text type='h1' color={theme.colors.text2}>
+      <Text
+        type='h1'
+        color={theme.colors.text2}
+        containerProps={{ m: '0 0 1.6rem' }}
+      >
         Saved Tracks
       </Text>
       {savedTracks.length === 0 ? (
         <Text type='p' color={theme.colors.text3}>
           You didn’t save any tracks, yet.
-          <br />
-          <br />
-          Drag and drop samples into the track timeline to start.
         </Text>
       ) : (
         savedTracks.map((track) => <SavedTrack key={track.id} track={track} />)
