@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Box from 'components/abstract/Box';
 import Droppable from 'components/abstract/Droppable';
@@ -12,9 +12,11 @@ import theme from 'style/theme';
 const emptyPartPrint = { name: 'blank', duration: 2, src: '' };
 
 const TrackDraft = () => {
-  const { currentlyPlayingDraftTrackPart, isTrackDraftPlaying } = useContext(
-    MainContext
-  );
+  const {
+    currentlyPlayingDraftTrackPart,
+    isTrackDraftPlaying,
+    savedTracks,
+  } = useContext(MainContext);
 
   const [parts, setParts] = useState(
     Array.from(new Array(25), () => ({
@@ -58,6 +60,20 @@ const TrackDraft = () => {
       return newParts;
     });
   };
+
+  const onClearTrackDraft = () => {
+    setParts((oldParts) => {
+      const newParts = [...oldParts].map(() => ({
+        id: Math.random().toString(),
+        ...emptyPartPrint,
+      }));
+      return newParts;
+    });
+  };
+
+  useEffect(() => {
+    onClearTrackDraft();
+  }, [savedTracks]);
 
   return (
     <Box

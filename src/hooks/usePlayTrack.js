@@ -26,7 +26,7 @@ const usePlayTrack = ({ parts, id }) => {
   const playTrack = () => {
     setIsPlaying(true);
     setCurrentlyGlobalPlayingAudio({
-      src: 'draft-track',
+      src: id,
     });
 
     const playPart = ({ part, index }) => {

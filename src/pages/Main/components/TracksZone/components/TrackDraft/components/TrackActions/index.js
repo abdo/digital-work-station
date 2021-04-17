@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Box from 'components/abstract/Box';
 import { MainContext } from 'pages/Main';
 import PropTypes from 'prop-types';
-import Text from 'components/basic/Text';
+import TextInput from 'components/basic/TextInput';
 import assets from 'assets';
 import theme from 'style/theme';
 import usePlayTrack from 'hooks/usePlayTrack';
@@ -11,10 +11,13 @@ import usePlayTrack from 'hooks/usePlayTrack';
 const { PlayIcon, PauseIcon } = assets;
 
 const TrackActions = ({ parts }) => {
+  const [trackName, setTrackName] = useState('');
+
   const {
     setCurrentlyPlayingDraftTrackPart,
     isTrackDraftPlaying,
     setIsTrackDraftPlaying,
+    onSaveTrack,
   } = useContext(MainContext);
 
   const {
@@ -35,7 +38,20 @@ const TrackActions = ({ parts }) => {
     setCurrentlyPlayingDraftTrackPart(currentlyPlayingPart);
   }, [currentlyPlayingPart]);
 
+  const isTrackPlayable = parts.some((part) => part.src);
+
+  const saveTrack = () => {
+    if (!isTrackPlayable) return;
+    onSaveTrack({
+      name: trackName || 'Unnamed Track',
+      id: parts[0].id,
+      parts,
+    });
+    setTrackName('');
+  };
+
   const toggleTrackPlaying = () => {
+    if (!isTrackPlayable) return;
     if (isTrackDraftPlaying) {
       pauseTrack();
     } else {
@@ -53,24 +69,30 @@ const TrackActions = ({ parts }) => {
       justifyContent='space-between'
     >
       <Box>
-        <Text
+        <TextInput
           containerProps={{
             m: '0 0 0.8rem',
           }}
-        >
-          Track Name
-        </Text>
+          placeholder='Track Name'
+          onChange={(e) => setTrackName(e.target.value)}
+          value={trackName}
+        />
         <Box
           bgc={theme.colors.background5}
           borderRadius='2.3rem'
           w='fit-content'
           p='0.2rem 1rem'
-          pointer
+          onClick={saveTrack}
+          cursor={isTrackPlayable ? 'pointer' : 'not-allowed'}
         >
           Save
         </Box>
       </Box>
-      <Box pointer m='0 0 -0.8rem' onClick={toggleTrackPlaying}>
+      <Box
+        m='0 0 -0.8rem'
+        onClick={toggleTrackPlaying}
+        cursor={isTrackPlayable ? 'pointer' : 'not-allowed'}
+      >
         {isTrackDraftPlaying ? <PauseIcon /> : <PlayIcon />}
       </Box>
     </Box>
@@ -78,7 +100,8 @@ const TrackActions = ({ parts }) => {
 };
 
 TrackActions.propTypes = {
-  parts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  parts: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string }))
+    .isRequired,
 };
 
 export default TrackActions;

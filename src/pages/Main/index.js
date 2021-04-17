@@ -14,6 +14,11 @@ const Main = () => {
     setCurrentlyPlayingDraftTrackPart,
   ] = useState(null);
   const [isTrackDraftPlaying, setIsTrackDraftPlaying] = useState(false);
+  const [savedTracks, setSavedTracks] = useState([]);
+
+  const onSaveTrack = (newTrack) => {
+    setSavedTracks((tracks) => [newTrack, ...tracks]);
+  };
 
   const minPageHeight = `calc(100vh - ${headerHeight})`;
 
@@ -26,6 +31,8 @@ const Main = () => {
         setCurrentlyPlayingDraftTrackPart,
         isTrackDraftPlaying,
         setIsTrackDraftPlaying,
+        savedTracks,
+        onSaveTrack,
       }}
     >
       <Box minH={minPageHeight} display='flex'>
