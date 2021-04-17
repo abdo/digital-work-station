@@ -43,6 +43,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: ${({ theme }) => theme.colors.text1};
+    background-color: ${({ theme }) => theme.colors.main};
     line-height: 21px;
     font-size: 1.4rem;
 

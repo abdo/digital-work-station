@@ -1,11 +1,15 @@
 import Box from 'components/abstract/Box';
 import Draggable from 'components/abstract/Draggable';
+import { MainContext } from 'pages/Main';
 import Sample from './components/Sample';
 import Text from 'components/basic/Text';
 import samples from './samples';
 import theme from 'style/theme';
+import { useContext } from 'react';
 
 const SamplesZone = () => {
+  const { isTrackDraftPlaying } = useContext(MainContext);
+
   return (
     <Box
       w='100%'
@@ -28,7 +32,7 @@ const SamplesZone = () => {
           type='sample'
           data={sample}
           renderDraggableComponent={({ events }) => (
-            <div {...events}>
+            <div {...(isTrackDraftPlaying ? {} : events)}>
               <Sample sample={sample} key={sample.name} />
             </div>
           )}

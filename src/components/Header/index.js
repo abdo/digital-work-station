@@ -21,9 +21,13 @@ const Header = () => {
       <Img
         src={appLogo}
         alt='app logo'
-        containerProps={{ m: '0 1.6rem 0 0' }}
+        containerProps={{ m: '0 1.6rem 0 0', pointer: true }}
       />
-      <Text type='h2' color={theme.colors.white}>
+      <Text
+        type='h2'
+        color={theme.colors.white}
+        containerProps={{ pointer: true }}
+      >
         My Studio
       </Text>
     </Box>

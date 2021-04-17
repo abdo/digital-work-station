@@ -1,6 +1,15 @@
 import musicSamples from 'assets/music-samples';
 
-const { Bass, Guitar, Vocals, Hammond, Drums, News } = musicSamples;
+const {
+  Bass,
+  Guitar,
+  Vocals,
+  Hammond,
+  Drums,
+  Chill,
+  Wind,
+  Cheering,
+} = musicSamples;
 
 const samples = [
   {
@@ -34,10 +43,22 @@ const samples = [
     duration: 3.3,
   },
   {
-    name: 'News Opening',
-    id: 'News Opening',
-    src: News,
-    duration: 7,
+    name: 'Chill',
+    id: 'Chill',
+    src: Chill,
+    duration: 11,
+  },
+  {
+    name: 'Wind',
+    id: 'Wind',
+    src: Wind,
+    duration: 2,
+  },
+  {
+    name: 'Cheering',
+    id: 'Cheering',
+    src: Cheering,
+    duration: 2,
   },
 ];
 

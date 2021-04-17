@@ -16,6 +16,7 @@ const theme = {
     flameBackground: '#F7F0EE',
     green: '#44837D',
     yellow: '#E2AC4B',
+    blue: '#4E95D5',
   },
   fontFamilies: {
     main: 'Inter',
