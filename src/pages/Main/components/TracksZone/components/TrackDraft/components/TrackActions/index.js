@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Box from 'components/abstract/Box';
 import { MainContext } from 'pages/Main';
@@ -6,69 +6,34 @@ import PropTypes from 'prop-types';
 import Text from 'components/basic/Text';
 import assets from 'assets';
 import theme from 'style/theme';
+import usePlayTrack from 'hooks/usePlayTrack';
 
 const { PlayIcon, PauseIcon } = assets;
 
 const TrackActions = ({ parts }) => {
   const {
-    currentlyPlayingAudio: currentlyGlobalPlayingAudio,
-    setCurrentlyPlayingAudio: setCurrentlyGlobalPlayingAudio,
     setCurrentlyPlayingDraftTrackPart,
     isTrackDraftPlaying,
     setIsTrackDraftPlaying,
   } = useContext(MainContext);
 
-  const [currentlyPlayingAudio, setCurrentlyPlayingAudio] = useState(null);
+  const {
+    playTrack,
+    pauseTrack,
+    isPlaying,
+    currentlyPlayingPart,
+  } = usePlayTrack({
+    parts,
+    id: 'draft-track',
+  });
 
-  const pauseTrack = () => {
-    setIsTrackDraftPlaying(false);
-    if (currentlyPlayingAudio) {
-      currentlyPlayingAudio.pause();
-    }
-    setCurrentlyPlayingAudio(null);
-    setCurrentlyPlayingDraftTrackPart(null);
-  };
+  useEffect(() => {
+    setIsTrackDraftPlaying(isPlaying);
+  }, [isPlaying]);
 
-  const playTrack = () => {
-    setIsTrackDraftPlaying(true);
-    setCurrentlyGlobalPlayingAudio({ src: 'track' });
-
-    const playPart = ({ part, index }) => {
-      const playNextPart = () => {
-        // To get updated state
-        setIsTrackDraftPlaying((currentIsTrackDraftPlaying) => {
-          if (currentIsTrackDraftPlaying) {
-            if (index + 1 <= parts.length - 1) {
-              playPart({
-                part: parts[index + 1],
-                index: index + 1,
-              });
-            } else {
-              pauseTrack();
-            }
-          }
-          return currentIsTrackDraftPlaying;
-        });
-      };
-
-      setCurrentlyPlayingDraftTrackPart(part);
-      if (part.src) {
-        const partAudio = new Audio(part.src);
-        setCurrentlyPlayingAudio(partAudio);
-        partAudio.play();
-        partAudio.onended = () => {
-          playNextPart();
-        };
-      } else {
-        setCurrentlyPlayingAudio(null);
-        setTimeout(() => {
-          playNextPart();
-        }, part.duration * 1000);
-      }
-    };
-
-    playPart({ part: parts[0], index: 0 });
-  };
+  useEffect(() => {
+    setCurrentlyPlayingDraftTrackPart(currentlyPlayingPart);
+  }, [currentlyPlayingPart]);
 
   const toggleTrackPlaying = () => {
     if (isTrackDraftPlaying) {
@@ -77,12 +42,6 @@ const TrackActions = ({ parts }) => {
       playTrack();
     }
   };
-
-  useEffect(() => {
-    if (currentlyGlobalPlayingAudio.src !== 'track') {
-      pauseTrack();
-    }
-  }, [currentlyGlobalPlayingAudio]);
 
   return (
     <Box

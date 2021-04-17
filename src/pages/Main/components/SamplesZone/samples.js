@@ -55,8 +55,8 @@ const samples = [
     duration: 2,
   },
   {
-    name: 'Cheering',
-    id: 'Cheering',
+    name: 'Cheer',
+    id: 'Cheer',
     src: Cheering,
     duration: 2,
   },

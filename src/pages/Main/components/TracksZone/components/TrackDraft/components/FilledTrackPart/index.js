@@ -14,6 +14,8 @@ const FilledTrackPart = ({
   isPartBeingPlayed,
   onRemoveSample,
 }) => {
+  const isShortDuration = duration <= 2;
+
   return (
     <Part
       key={id}
@@ -21,7 +23,7 @@ const FilledTrackPart = ({
       h='100%'
       bgc={color}
       borderRadius='0.8rem'
-      p={duration <= 2 ? '0.2rem' : '1rem'}
+      p={isShortDuration ? '1rem 0.4rem' : '1rem'}
       display='flex'
       flexDirection='column'
       justifyContent='space-between'
@@ -34,7 +36,11 @@ const FilledTrackPart = ({
       <Box alignSelf='center' hidden={!isPartBeingPlayed}>
         &#127925;
       </Box>
-      <Text color={theme.colors.white} type='small' containerProps={{ m: '0' }}>
+      <Text
+        color={theme.colors.white}
+        type={isShortDuration ? 'x-small' : 'small'}
+        containerProps={{ m: '0' }}
+      >
         {name}
       </Text>
       <Box

@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import theme from 'style/theme';
 
 export const getFontSize = (type) =>
-  type === 'small'
+  type === 'x-small'
+    ? '0.8rem'
+    : type === 'small'
     ? '1rem'
     : type === 'p'
     ? '1.4rem'
