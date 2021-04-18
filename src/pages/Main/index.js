@@ -51,8 +51,13 @@ const Main = () => {
         onSaveTrack,
       }}
     >
-      <Box minH={minPageHeight} display='flex'>
-        <Box w='35%' minH={minPageHeight} bgc={theme.colors.background2}>
+      <Box minH={minPageHeight} display='flex' flexDirectionT='column'>
+        <Box
+          w='35%'
+          wt='100%'
+          minH={minPageHeight}
+          bgc={theme.colors.background2}
+        >
           <SamplesZone />
         </Box>
         <Box w='fill-available' minH={minPageHeight}>
