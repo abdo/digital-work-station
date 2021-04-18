@@ -5,6 +5,7 @@ import { MainContext } from 'pages/Main';
 import PropTypes from 'prop-types';
 import TextInput from 'components/basic/TextInput';
 import assets from 'assets';
+import createTestAttribute from 'utils/helpers/createTextAttribute';
 import theme from 'style/theme';
 import usePlayTrack from 'hooks/usePlayTrack';
 
@@ -76,6 +77,11 @@ const TrackActions = ({ parts }) => {
           placeholder='Track Name'
           onChange={(e) => setTrackName(e.target.value)}
           value={trackName}
+          data-test={createTestAttribute({
+            page: 'main',
+            element: 'input',
+            context: 'track-name',
+          })}
         />
         <Box
           bgc={theme.colors.background5}

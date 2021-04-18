@@ -20,6 +20,9 @@ const SavedTracks = () => {
       {savedTracks.length === 0 ? (
         <Text type='p' color={theme.colors.text3}>
           You didn’t save any tracks, yet.
+          <br />
+          <br />
+          Drag and drop samples into the track timeline to start.
         </Text>
       ) : (
         savedTracks.map((track) => <SavedTrack key={track.id} track={track} />)

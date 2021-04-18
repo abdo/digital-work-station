@@ -6,14 +6,16 @@
   "extends": [
     "airbnb",
     "prettier",
-    "prettier/react"
+    "prettier/react",
+    "plugin:cypress/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2020
   },
   "plugins": [
     "react",
-    "prettier"
+    "prettier",
+    "cypress"
   ],
   "rules": {
     "prettier/prettier": [
@@ -41,6 +43,7 @@
     "import/no-mutable-exports": "off",
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
+    "import/extensions": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {

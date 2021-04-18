@@ -5,6 +5,7 @@ import { MainContext } from 'pages/Main';
 import PropTypes from 'prop-types';
 import Text from 'components/basic/Text';
 import assets from 'assets';
+import createTestAttribute from 'utils/helpers/createTextAttribute';
 import theme from 'style/theme';
 
 const { PlayIcon, PauseIcon } = assets;
@@ -62,9 +63,14 @@ const Sample = ({ sample: { name, src }, isDragging }) => {
       alignItems='center'
       b={isDragging ? `1px solid ${theme.colors.flame}` : ''}
       onClick={toggleAudioPlaying}
+      data-test={createTestAttribute({
+        page: 'main',
+        element: 'div',
+        context: 'audio-sample',
+      })}
       pointer
     >
-      <Box m='0 0 -0.8rem 0'>
+      <Box m='0 0 -0.8rem 0' id={isAudioPlaying ? 'pause-icon' : 'play-icon'}>
         {isAudioPlaying ? <PauseIcon /> : <PlayIcon isFocused={isDragging} />}
       </Box>
       <Text type='p' containerProps={{ m: '0 0 0 1.2rem' }}>
