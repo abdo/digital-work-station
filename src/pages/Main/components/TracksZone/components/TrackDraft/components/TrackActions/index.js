@@ -44,7 +44,7 @@ const TrackActions = ({ parts }) => {
   const saveTrack = () => {
     if (!isTrackPlayable) return;
     onSaveTrack({
-      name: trackName || 'Unnamed Track',
+      name: trackName.trim() || 'Unnamed Track',
       id: parts[0].id,
       parts,
     });
